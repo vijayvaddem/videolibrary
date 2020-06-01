@@ -1,4 +1,5 @@
 import * as genresAPI from "./fakeGenreService";
+import http from "./httpService";
 
 const movies = [
   {
@@ -77,7 +78,9 @@ const movies = [
   },
 ];
 
-export function getMovies() {
+export async function getMovies() {
+  const { data: movies } = await http.get("/movies");
+  console.log(movies);
   return movies;
 }
 
@@ -87,13 +90,13 @@ export function getMovie(id) {
 
 export function saveMovie(movie) {
   let movieInDb = movies.find((m) => m._id === movie._id) || {};
-  movieInDb.name = movie.name;
+  movieInDb.title = movie.title;
   movieInDb.genre = genresAPI.genres.find((g) => g._id === movie.genreId);
   movieInDb.numberInStock = movie.numberInStock;
   movieInDb.dailyRentalRate = movie.dailyRentalRate;
 
   if (!movieInDb._id) {
-    movieInDb._id = Date.now();
+    movieInDb._id = Date.now().toString();
     movies.push(movieInDb);
   }
 
