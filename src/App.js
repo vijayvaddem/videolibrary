@@ -15,13 +15,6 @@ import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-// function App() {
-//   return (
-//     <main className="container">
-//       <h1>Hello World</h1>
-//     </main>
-//   );
-// }
 
 class App extends Component {
   state = {};
